@@ -1,3 +1,4 @@
+<%@page import="com.tech.blog.entities.Message"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .banner-background{
-clip-path: polygon(20% 0%, 80% 0%, 100% 0, 100% 89%, 74% 94%, 30% 93%, 0 100%, 0 0);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 0, 100% 89%, 74% 94%, 30% 93%, 0 100%, 0 0);
         }
     </style>
     <title>Login Page</title>
@@ -28,23 +29,35 @@ clip-path: polygon(20% 0%, 80% 0%, 100% 0, 100% 89%, 74% 94%, 30% 93%, 0 100%, 0
                             <p>
                                 Login Here
                             </p>
-                        </div>                 
+                        </div>  
+
+                        <%
+                            Message m = (Message) session.getAttribute("msg");
+                            if (m != null) {
+
+                        %>
+                        <div class="alert <%= m.getCssClass()%>" role="alert">
+                            <%= m.getContent()%>
+                        </div>
+
+                        <%
+                                session.removeAttribute("msg");
+                            }
+                        %>
                         <div class="card-body">
-                            <form>
+                            <form action="LoginServlet" method="post">
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
+                                    <input type="email"  name="email"  required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
                                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password">
+                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password">
                                 </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <div class="container text-center">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>                    

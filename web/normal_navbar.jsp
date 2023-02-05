@@ -30,7 +30,7 @@
             <a class="nav-link" href="login_page.jsp" tabindex="-1" aria-disabled="true"><span class="fa fa-user-circle"></span> Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="register_page.jsp" tabindex="-1" aria-disabled="true"><span class="fa fa-user-plus"></span> Signup</a>
+            <a class="nav-link" href="register_page.jsp" tabindex="-1" aria-disabled="true"><span class="fa fa-user-plus"></span> Sign up</a>
         </li>
       </ul>
       <form class="d-flex">

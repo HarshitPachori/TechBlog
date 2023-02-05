@@ -17,7 +17,7 @@
 <body>
     <!--navbar-->
     <%@include file="normal_navbar.jsp" %>
-    <main class="primary-background  banner-background " style="padding-bottom: 80px;padding-top: 20px;">
+    <main class="primary-background  banner-background " style="padding-bottom: 90px;padding-top: 10px;">
         <div class="container">
             <div class="col-md-4 offset-md-4">
                 <div class="card">
@@ -28,30 +28,30 @@
                     </div>
                     <div class="card-body">
                         <form id="reg-form" action="RegisterServlet" method="POST">
-                            <div class="mb-3">
+                            <div class="mb-1">
                                 <label for="user_name" class="form-label">User Name</label>
                                 <input name="user_name" type="text" class="form-control" id="user_name" aria-describedby="emailHelp" placeholder="Enter Name">
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-1">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                                 <input name ="user_email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-1">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
                                 <input name="user_password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password">
                             </div>
-                            <div class="mb-3">
-                                <label for="gender" class="form-label">Select Gender</label>
+                            <div class="mb-1">
+                                <label for="gender" class="form-label">Select Gender  </label>
                                 <br>
-                                <input type="radio"  id="gender" name ="gender" value="male">Male
-                                <input type="radio"  id="gender" name ="gender" value="female">Female
+                                <input type="radio"  id="gender" name ="gender" value="male">   Male
+                                <input type="radio"  id="gender" name ="gender" value="female">   Female
                             </div>     
 
                             <div class="form-group">
-                                <textarea id="id" name="about" class="form-control" rows="5"  placeholder="Enter something about yourself"></textarea>
+                                <textarea id="id" name="about" class="form-control" rows="3"  placeholder="Enter something about yourself"></textarea>
                             </div>
-                            <div class="mb-3 form-check">
+                            <div class="mb-1 form-check">
                                 <input name="check" type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">agree terms & conditions</label>
                             </div>
@@ -60,7 +60,9 @@
                                 <span class="fa fa-refresh fa-spin fa-3x"></span>
                                 <h4>Please wait...</h4>
                             </div>                           
-                            <button id="submit_button" type="submit" class="btn btn-primary">Submit</button>
+                            <div class="container text-center">  
+                                <button id="submit_button" type="submit" class="btn btn-primary">Submit</button>
+                            </div>                        
                         </form>
                     </div>
                     <div class="card-footer">

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .banner-background{
-clip-path: polygon(20% 0%, 80% 0%, 100% 0, 100% 89%, 74% 94%, 30% 93%, 0 100%, 0 0);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 0, 100% 89%, 74% 94%, 30% 93%, 0 100%, 0 0);
 
 
         }
@@ -63,7 +63,7 @@ clip-path: polygon(20% 0%, 80% 0%, 100% 0, 100% 89%, 74% 94%, 30% 93%, 0 100%, 0
                 </div>
             </div>
         </div>
-                <div class="row mb-2"><!-- ek row me 12 card aa skte h -->
+        <div class="row mb-2"><!-- ek row me 12 card aa skte h -->
             <div class="col-md-4"> <!-- 4cd card ki col -->
                 <div class="card" >                   
                     <div class="card-body">
