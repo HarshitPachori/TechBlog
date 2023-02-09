@@ -1,11 +1,15 @@
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.tech.blog.entities.Categories"%>
+<%@page import="com.tech.blog.entities.Post"%>
 <%@page import="com.tech.blog.helper.ConnectionProvider"%>
 <%@page import="com.tech.blog.dao.PostDao"%>
-<%@page import="com.tech.blog.entities.Message"%>
-<%@page import="com.tech.blog.entities.User"%>
 <%@page errorPage="error_page.jsp" %>
+<%@page import="com.tech.blog.entities.User"%>
 <%
+    int postId = Integer.parseInt(request.getParameter("post_id"));
+    PostDao dao = new PostDao(ConnectionProvider.getConnection());
+    Post p = dao.getPostByPostId(postId);
     User user = (User) session.getAttribute("currentUser");
     if (user == null) {
         response.sendRedirect("login_page.jsp");
@@ -13,18 +17,30 @@
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <stylesheet" href="css/mystyle.css"/><link rel="stylesheet" href="css/mystyle.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .banner-background{
-            clip-path: polygon(20% 0%, 80% 0%, 100% 0, 100% 89%, 74% 94%, 30% 93%, 0 100%, 0 0);
-        }
-    </style>
-    <title>Profile Page</title>
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><%=p.getpTitle()%></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<stylesheet" href="css/mystyle.css"/><link rel="stylesheet" href="css/mystyle.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .banner-background{
+        clip-path: polygon(20% 0%, 80% 0%, 100% 0, 100% 89%, 74% 94%, 30% 93%, 0 100%, 0 0);
+    }
+    .post-title{
+        font-weight: 100;
+        font-size: 30px;
+    }
+    .post-content{
+        font-weight: 100;
+        font-size: 25px;
+    }
+    .post-code{
+        
+    }
+</style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark primary-background">
@@ -68,52 +84,42 @@
         </div>
     </nav>
     <!--end of navbar-->
-    <%
-        Message m = (Message) session.getAttribute("msg");
-        if (m != null) {
-    %>
-    <div class="alert <%= m.getCssClass()%>" role="alert">
-        <%= m.getContent()%>
-    </div>
-    <%
-            session.removeAttribute("msg");
-        }
-    %>
 
-    <!--main body of the page-->
-    <main>
-        <div class="container">
-            <div class="row mt-4">
-                <!--first column-->
-                <div class="col-md-4">
-                    <!--categories-->
-                    <div class="list-group ">
-                        <a href="#" onclick="getPosts(0,this)" class="c-link list-group-item list-group-item-action active" aria-current="true">
-                            All Posts
-                        </a>
-                        <%
-                            PostDao d = new PostDao(ConnectionProvider.getConnection());
-                            ArrayList<Categories> list1 = d.getAllCategories();
-                            for (Categories c1 : list1) {
-                        %>
-                        <a href="#" onclick="getPosts(<%=c1.getCid()%>,this)" class="c-link list-group-item list-group-item-action"><%=  c1.getName()%></a>
-                        <%
-                            }
-                        %>
+    <!--main content of body-->
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header primary-background text-white">
+                        <h4 class="post-title"><%=p.getpTitle()%></h4>             
                     </div>
-                </div>
-                <div class="col-md-8" >
-                    <!--posts-->
-                    <div class="container text-center" id="loader">
-                        <i class="fa fa-refresh fa-3x fa-spin"></i>
-                        <h3 class="mt-2">Loading...</h3>
+                    <div class="card-body">
+                        <img src="blog_pics/<%=p.getpPic()%>" class="card-img-top my-2" alt="...">
+                        <div class="row my-3">
+                            <div class="col-md-8">
+                                <p class="post-userinfo"><a href="#!">harshit pachori</a> has posted.</p>
+                            </div>
+                            <div class="col-md-4">
+                                                        <p class="post-date"><%= p.getpDate().toLocaleString()%></p>
+
+                            </div>
+                        </div>
+                        <p class="post-content"><%= p.getpContent()%></p>
+                        <br>
+                        <br>
+                        <div class="post-code">
+                            <pre><%= p.getpCode()%></pre>
+                        </div>
                     </div>
-                    <div class="container-fluid" id="post-container"></div>
+                    <div class="card-footer primary-background  ">
+                        <a href="#!" class="btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i><span>10</span></a>
+                        <a href="#!" class="btn btn-outline-light btn-sm"><i class="fa fa-commenting-o"></i><span>20</span></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </main>
-    <!--end of main body of the page-->
+    </div>
+    <!--end of main content of body-->
     <!--profile modal-->
     <!-- Button trigger modal -->
 
@@ -275,8 +281,6 @@
 
     <!--end add post modal-->
 
-
-
     <!--js-->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -340,35 +344,5 @@
             });
         });
     </script>
-
-    <!--loading post using ajax-->
-    <script >
-        function getPosts(catId,temp) {
-            //console.log(catId);
-            $('#loader').show();
-            $('#post-container').hide();
-            
-            $('.c-link').removeClass('active');
-            // yahan ajax ke use se request send ki post.jsp par jisse jo bhi jsp me hoga wo profile page pr show hojaega load hone ke baad.
-            $.ajax({
-                url: "load_post.jsp",
-                data: {cid:catId},
-                success: function (data, textStatus, jqXHR) {
-                    console.log(data);
-                    $('#loader').hide();
-                    $('#post-container').show();
-                    $('#post-container').html(data);
-                    $(temp).addClass('active');
-
-                }
-            });
-        };
-        
-        $(document).ready(function () {
-            // all post wale ko blue karne ke liye uska ref nikala
-            let allPostRef = $('.c-link')[0];
-            getPosts(0,allPostRef);
-        });
-    </script>
 </body>
-</html>
+
