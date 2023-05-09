@@ -10,8 +10,8 @@ public static Connection getConnection(){
         Class.forName("com.mysql.jdbc.Driver");
         // create a connection
         con = DriverManager.
-                getConnection("jdbc:mysql://containers-us-west-102.railway.app:6025/railway", "root", "W7Rfp6k0eaOXeo1Rgjjs");
-//                getConnection("jdbc:mysql://localhost:3306/techblog", "root", "harshit@345");
+//                getConnection("jdbc:mysql://containers-us-west-102.railway.app:6025/railway", "root", "W7Rfp6k0eaOXeo1Rgjjs");
+                getConnection("jdbc:mysql://localhost:3306/techblog", "root", "harshit@345");
         
         
        }
